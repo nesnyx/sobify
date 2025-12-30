@@ -1,0 +1,17 @@
+
+
+services:
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    restart: unless-stopped
+    ports:
+      - "8888:8888"   # Expose ChromaDB API
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/data
+      - ANONYMIZED_TELEMETRY=FALSE
+      # opsional: limit worker threads
+      # - CHROMA_SERVER_THREADS=4
+    volumes:
+      - ./chromadb_data:/data

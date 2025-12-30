@@ -1,0 +1,66 @@
+{
+  "name": "sobify",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@chroma-core/default-embed": "^0.1.8",
+    "@google/genai": "^1.27.0",
+    "@langchain/core": "^1.0.1",
+    "@langchain/google-genai": "^1.0.0",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/jwt": "^11.0.1",
+    "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.1.7",
+    "@nestjs/typeorm": "^11.0.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.4",
+    "@types/passport-jwt": "^4.0.1",
+    "@zilliz/milvus2-sdk-node": "^2.6.2",
+    "bcrypt": "^6.0.0",
+    "chromadb": "^3.0.17",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "langchain": "^1.0.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.27"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "prisma": "^6.18.0"
+  }
+}
