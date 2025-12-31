@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { OrdersModule } from './modules/orders/orders.module';
 import { MenuModule } from './modules/menu/menu.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +18,7 @@ import { MenuModule } from './modules/menu/menu.module';
   }), ConfigModule.forRoot({
     isGlobal: true, 
     envFilePath: '.env', 
-  }), AgentModule,AuthModule,UsersModule,OrdersModule,MenuModule],
+  }), AgentModule,AuthModule,UsersModule,OrdersModule,MenuModule,NotificationModule,MerchantModule],
   controllers: [],
   providers: [],
 })
