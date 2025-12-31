@@ -1,7 +1,7 @@
 import { Runtime, tool } from "langchain"
 import { CreateOrderDto } from "src/modules/orders/dto/create-order.dto";
 import { OrdersService } from "src/modules/orders/orders.service";
-import { v7 as uuid7 } from "uuid";
+
 import * as z from "zod";
 
 
@@ -18,7 +18,7 @@ export const baseTools = async (ordersService: OrdersService) => {
             customer_name: string;
             product_name: string;
             quantity: number;
-           
+
         }) => {
             try {
                 // 2. Buat DTO yang benar, petakan snake_case ke camelCase
@@ -75,5 +75,40 @@ export const baseTools = async (ordersService: OrdersService) => {
         },
     );
 
-    return [saveOrder];
+    const checkOrderStatus = tool(
+        async({
+            order_id
+        } : {
+            order_id: string;
+        }) => {
+            try {
+                const existingOrder = await ordersService.findOne(order_id);
+                if (!existingOrder) {
+                    return `⚠️ Pesanan dengan ID ${order_id} tidak ditemukan. Mohon periksa kembali ID pesanan.`;
+                }
+                return `
+                📦 Nomor Pesanan: ${existingOrder.id}
+                👤 Nama: ${existingOrder.customer.name}
+                    Status Pesanan: ${existingOrder.status}
+                `
+
+            } catch (err) {
+                // Sangat penting untuk log error di konsol NestJS Anda!
+                console.error("Kesalahan di dalam tool check_order_status:", err);
+
+                // Beri tahu AI apa yang salah
+                return `Terjadi kesalahan saat melakukan pengecekan pesanan: ${err.message}. 
+                Beri tahu pelanggan bahwa terjadi kesalahan.`;
+            }
+        },
+        {
+            name: 'check_order_status',
+            description: 'Periksa status pesanan berdasarkan ORDER ID pesanan yang diberikan.',
+            schema: z.object({
+                order_id: z.string().describe('ID unik dari pesanan yang ingin diperiksa statusnya'),
+            }),
+        }
+    )
+
+    return [saveOrder,checkOrderStatus];
 }
