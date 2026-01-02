@@ -7,14 +7,14 @@ const getPageTitle = (pathname) => {
   const titles = {
     '/dashboard': 'Dashboard',
     '/transactions': 'Transaksi',
-    '/products': 'Produk',
+    '/menu': 'Menu',
     '/reports': 'Laporan',
     '/settings': 'Pengaturan',
   };
   return titles[pathname]
 };
 
-export default function SidebarLayout() {
+export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
@@ -32,7 +32,7 @@ export default function SidebarLayout() {
   }, [isMobile]);
 
   const navItems = [
-    // { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Dashboard', href: '/dashboard' },
     // { name: 'Transaksi', href: '/transactions' },
     { name: 'Menu', href: '/menu' },
     // { name: 'Laporan', href: '/reports' },
@@ -51,13 +51,12 @@ export default function SidebarLayout() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
           <div className="flex items-center space-x-2">
-           
+
             <span className="text-xl font-bold text-gray-800">
               Sobify<span className="text-indigo-600">App</span>
             </span>
@@ -69,11 +68,10 @@ export default function SidebarLayout() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-150 ${
-                    location.pathname === item.href
-                      ? 'bg-indigo-50 text-indigo-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
+                  className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-150 ${location.pathname === item.href
+                    ? 'bg-indigo-50 text-indigo-700 font-medium'
+                    : 'text-gray-700 hover:bg-gray-100'
+                    }`}
                 >
                   <span className="ml-3 text-sm">{item.name}</span>
                 </a>
@@ -104,7 +102,7 @@ export default function SidebarLayout() {
 
           <div className="flex items-center space-x-4">
             <button className="relative p-1 text-gray-600 hover:text-gray-900 cursor-pointer focus:outline-none">
-              <Bell/>
+              <Bell />
               <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs text-white bg-red-500 rounded-full">
                 3
               </span>

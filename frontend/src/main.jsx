@@ -10,19 +10,18 @@ import {
 import Login from "./pages/auth/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProtectedRoute from './components/layout/ProtectedRoute.jsx';
-import Sidebar from './components/layout/Sidebar.jsx';
+import Layout from './components/layout/Layout.jsx';
 import Menu from './pages/menu/Menu.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route element={<Sidebar />}>
-          <Route path="/" element={<App />} />
-          <Route path='/menu' element={<Menu/>}/>
-        </Route>
 
+        <Route element={<Layout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path='/menu' element={<Menu />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
